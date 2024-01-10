@@ -1,0 +1,22 @@
+-app
+  |-authentication
+  |-cart-shopping
+  |-order
+  |-payment
+  |-product
+-node_modules
+-public
+-src
+  |-component
+  |-layout
+  |-shared
+-.eslintrc.json
+-.gitignore
+-next.env.d.ts
+-next.config.js
+-.package-lock.json
+-.package.json
+-.postcss.config.js
+-README.md
+-tailwind.config.ts
+tsconfig.json
