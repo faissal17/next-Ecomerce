@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { GetAllProducts } from '../Api/productApi';
+import { GetAllProducts, DeleteProduct } from '../Api/productApi';
 import { Product } from '../models/productModel';
 
 const Card = () => {
@@ -27,6 +27,23 @@ const Card = () => {
 
     fetchData();
   }, []);
+
+  const handleDelete = async (productId: any) => {
+    try {
+      const deleteResponse = await DeleteProduct(productId);
+      console.log(deleteResponse);
+
+      if (deleteResponse) {
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== productId.id),
+        );
+        console.log('Product deleted');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 mx-4 sm:mx-8 lg:mx-12 xl:mx-16 mt-10">
       {products.map((product, index) => (
@@ -59,6 +76,7 @@ const Card = () => {
             <p className="text-blue-800 text-lg font-semibold">
               Price: ${product.price}
             </p>
+            <button onClick={() => handleDelete(product.id)}>delete</button>
           </div>
         </div>
       ))}

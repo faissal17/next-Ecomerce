@@ -14,3 +14,13 @@ export const GetAllProducts = async () => {
     return null;
   }
 };
+
+export const DeleteProduct = async (productId: any) => {
+  try {
+    const response = await productApi.delete(`products/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
