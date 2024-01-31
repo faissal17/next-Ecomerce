@@ -24,3 +24,12 @@ export const DeleteProduct = async (productId: any) => {
     return null;
   }
 };
+export const AddProduct = async (productData: any) => {
+  try {
+    const response = await productApi.post('products', productData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
