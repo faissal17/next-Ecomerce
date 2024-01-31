@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { GetAllProducts, DeleteProduct } from '../Api/productApi';
 import { Product } from '../models/productModel';
+import Swal from 'sweetalert2';
 
 const Card = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -37,7 +38,10 @@ const Card = () => {
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product.id !== productId.id),
         );
+        Swal.fire('Deleted!', 'Product has been deleted.', 'success');
         console.log('Product deleted');
+      } else {
+        Swal.fire('Error', 'Failed to delete the Product.', 'error');
       }
     } catch (error) {
       console.error(error);
@@ -60,8 +64,10 @@ const Card = () => {
             />
           </div>
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{product.name}</div>
-            <p className="text-gray-700 text-base h-20 overflow-hidden truncate">
+            <div className="font-bold text-xl mb-2 truncate">
+              {product.name}
+            </div>
+            <p className="text-gray-700 text-base h-20 truncate">
               {product.description}
             </p>
           </div>
@@ -72,11 +78,16 @@ const Card = () => {
               </span>
             )}
           </div>
-          <div className="px-6 py-4">
+          <div className="px-6 py-4 flex justify-between">
             <p className="text-blue-800 text-lg font-semibold">
               Price: ${product.price}
             </p>
-            <button onClick={() => handleDelete(product.id)}>delete</button>
+            <button
+              className="ml-2 text-red-600 hover:text-red-900 font-bold"
+              onClick={() => handleDelete(product.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       ))}
