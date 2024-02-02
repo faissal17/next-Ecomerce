@@ -4,12 +4,15 @@ import React, { useEffect, useState, ChangeEvent } from 'react';
 import { Product } from '../models/productModel';
 import { getAllCategoriies } from '../Api/categoryApi';
 import { Category } from '../models/productModel';
-import { AddProduct } from '../Api/productApi';
+import { editProduct } from '../Api/productApi';
 import Swal from 'sweetalert2';
+import { useParams } from 'next/navigation';
 
-const CreateProduct = () => {
+function UpdateProduct() {
   const [product, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+
+  const {id} = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +50,10 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       console.log(product);
-
-      const response = await AddProduct(product);
+      const response = await editProduct(+id, product);
+      console.log(response);
     } catch (error) {
       console.error('Error creating product:', error);
-      Swal.fire('Error', 'Failed to create the product.', 'error');
     }
   };
 
@@ -108,7 +110,7 @@ const CreateProduct = () => {
           <div className="my-2 w-1/2 lg:w-1/4">
             <button
               className="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
-                      focus:outline-none focus:shadow-outline"
+                          focus:outline-none focus:shadow-outline"
             >
               Submit
             </button>
@@ -117,6 +119,6 @@ const CreateProduct = () => {
       </div>
     </form>
   );
-};
+}
 
-export default CreateProduct;
+export default UpdateProduct;

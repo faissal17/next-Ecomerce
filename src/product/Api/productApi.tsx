@@ -33,3 +33,13 @@ export const AddProduct = async (productData: any) => {
     return null;
   }
 };
+
+export const editProduct = async (productId: number, productData: any) => {
+  try {
+    const response = await productApi.patch(`products/${productId}`, productData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};

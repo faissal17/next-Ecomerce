@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { GetAllProducts, DeleteProduct } from '../Api/productApi';
 import { Product } from '../models/productModel';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 const Card = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -67,7 +68,7 @@ const Card = () => {
             <div className="font-bold text-xl mb-2 truncate">
               {product.name}
             </div>
-            <p className="text-gray-700 text-base h-20 truncate">
+            <p className="text-gray-700 text-base h-6 truncate">
               {product.description}
             </p>
           </div>
@@ -78,10 +79,20 @@ const Card = () => {
               </span>
             )}
           </div>
-          <div className="px-6 py-4 flex justify-between">
+          <div className="px-6 py-4">
             <p className="text-blue-800 text-lg font-semibold">
               Price: ${product.price}
             </p>
+          </div>
+          <div className="px-6 py-4 flex justify-between">
+            <Link
+              href="/product/update/[id]"
+              as={`/product/update/${product.id}`}
+              className="ml-2 text-green-600 hover:text-green-900 font-bold"
+            >
+              Edit
+            </Link>
+
             <button
               className="ml-2 text-red-600 hover:text-red-900 font-bold"
               onClick={() => handleDelete(product.id)}

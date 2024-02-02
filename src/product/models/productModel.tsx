@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   price: number;
   description: string;
+  category: any;
   Image: string;
   categorieId: number;
   createdAt: Date;
