@@ -20,7 +20,7 @@ const Navbar = () => {
             className="rounded-full	"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Micro-Ecommerce
+            Micro-Ecommerce lkjlkj
           </span>
         </a>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
